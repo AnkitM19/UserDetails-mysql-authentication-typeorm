@@ -26,4 +26,5 @@ export class UserDto {
   @IsEmail()
   @IsNotEmpty({message:'Please Enter Valid EmailId'})
   emailId: string;
+  static Name: any;
 }
