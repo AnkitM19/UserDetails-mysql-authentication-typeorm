@@ -4,12 +4,10 @@ import { UserController } from '../controller/user.controller';
 import { UserService } from '../Service/user.service';
 import { UserRepository } from 'src/sql model/user.repository';
 import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from 'src/jwt.strategy';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: 'topSecret51',
       signOptions: {
@@ -18,7 +16,7 @@ import { JwtStrategy } from 'src/jwt.strategy';
     }),
     TypeOrmModule.forFeature([UserRepository]),
   ],
-  exports: [TypeOrmModule, JwtStrategy, PassportModule],
+  exports: [TypeOrmModule, JwtStrategy],
   controllers: [UserController],
   providers: [UserService, JwtStrategy],
 })

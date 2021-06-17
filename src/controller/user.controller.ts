@@ -29,27 +29,27 @@ export class UserController {
     return this.userService.signIn(user);
   }
   @Post('/test')
-  @UseGuards(AuthGuard)
+  @UseGuards(new AuthGuard())
   test(@Req() req) {
     console.log(req);
   }
   @Get()
-  @UseGuards(AuthGuard)
+  @UseGuards(new AuthGuard())
   getAllUser() {
     return this.userService.findAll();
   }
   @Get(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(new AuthGuard())
   getSingleUser(@Param('id') UserId: string) {
     return this.userService.findOne(UserId);
   }
   @Delete(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(new AuthGuard())
   deleteUser(@Param('id') USerId: string) {
     return this.userService.remove(USerId);
   }
   @Put(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(new AuthGuard())
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
