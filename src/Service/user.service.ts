@@ -10,7 +10,7 @@ import { UserRepository } from '../sql model/user.repository';
 import { UserDto } from 'src/dto/UserDto';
 import { UpdateUserDto } from 'src/dto/updateUserDto';
 import * as bcrypt from 'bcrypt';
-import { LoginDto } from 'src/auth/Auth.dto';
+import { LoginDto } from 'src/authentication/Auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from 'src/Interfaces/jwt.payload.interface';
 @Injectable()

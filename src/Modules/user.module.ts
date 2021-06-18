@@ -4,7 +4,7 @@ import { UserController } from '../controller/user.controller';
 import { UserService } from '../Service/user.service';
 import { UserRepository } from 'src/sql model/user.repository';
 import { JwtModule } from '@nestjs/jwt';
-import { UserGuard } from 'src/auth/auth.guard';
+import { UserGuard } from 'src/authentication/auth.guard';
 
 @Module({
   imports: [

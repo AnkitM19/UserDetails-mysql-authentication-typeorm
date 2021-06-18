@@ -12,8 +12,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 // import { UserGuard } from 'src/auth module/auth.guard';
-import { LoginDto } from 'src/auth/Auth.dto';
-import { UserGuard } from 'src/auth/auth.guard';
+import { LoginDto } from 'src/authentication/Auth.dto';
+import { UserGuard } from 'src/authentication/auth.guard';
 import { UpdateUserDto } from 'src/dto/updateUserDto';
 import { UserDto } from 'src/dto/UserDto';
 import { UserService } from '../Service/user.service';
