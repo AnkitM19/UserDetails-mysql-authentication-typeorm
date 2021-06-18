@@ -4,7 +4,7 @@ import { UserController } from '../controller/user.controller';
 import { UserService } from '../Service/user.service';
 import { UserRepository } from 'src/sql model/user.repository';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from 'src/jwt.strategy';
+import { UserGuard } from 'src/auth/auth.guard';
 
 @Module({
   imports: [
@@ -16,8 +16,8 @@ import { JwtStrategy } from 'src/jwt.strategy';
     }),
     TypeOrmModule.forFeature([UserRepository]),
   ],
-  exports: [TypeOrmModule, JwtStrategy],
+  exports: [TypeOrmModule, UserGuard, JwtModule],
   controllers: [UserController],
-  providers: [UserService, JwtStrategy],
+  providers: [UserService, UserGuard, JwtModule],
 })
 export class UserModule {}

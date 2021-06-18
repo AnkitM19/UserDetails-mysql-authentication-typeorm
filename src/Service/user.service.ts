@@ -10,7 +10,7 @@ import { UserRepository } from '../sql model/user.repository';
 import { UserDto } from 'src/dto/UserDto';
 import { UpdateUserDto } from 'src/dto/updateUserDto';
 import * as bcrypt from 'bcrypt';
-import { LoginDto } from 'src/dto/Auth.dto';
+import { LoginDto } from 'src/auth/Auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from 'src/Interfaces/jwt.payload.interface';
 @Injectable()
@@ -38,7 +38,8 @@ export class UserService {
   async signIn(authDto: LoginDto): Promise<{ accessToken: string }> {
     const { emailId, password } = authDto;
     const user = await this.userRepo.findOne({ emailId });
-    if (user && (await bcrypt.compare(password, user.password))) {
+    const compare = await bcrypt.compare(password, user.password);
+    if (user && compare) {
       const payload: JwtPayload = { emailId };
       const accessToken: string = await this.jwtService.sign(payload); //checking user validity
       return { accessToken };
@@ -46,6 +47,7 @@ export class UserService {
       throw new UnauthorizedException('Invalid username and password');
     }
   }
+
   findAll(): Promise<Users[]> {
     if (!Users) {
       throw new NotFoundException('Not Found');

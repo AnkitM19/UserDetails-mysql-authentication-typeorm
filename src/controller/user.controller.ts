@@ -11,11 +11,13 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthGuard } from 'src/auth.gaurd';
-import { LoginDto } from 'src/dto/Auth.dto';
+// import { UserGuard } from 'src/auth module/auth.guard';
+import { LoginDto } from 'src/auth/Auth.dto';
+import { UserGuard } from 'src/auth/auth.guard';
 import { UpdateUserDto } from 'src/dto/updateUserDto';
 import { UserDto } from 'src/dto/UserDto';
 import { UserService } from '../Service/user.service';
+
 @Controller('users')
 @UsePipes(ValidationPipe)
 export class UserController {
@@ -29,27 +31,28 @@ export class UserController {
     return this.userService.signIn(user);
   }
   @Post('/test')
-  @UseGuards(new AuthGuard())
+  @UseGuards(UserGuard)
   test(@Req() req) {
     console.log(req);
   }
   @Get()
-  @UseGuards(new AuthGuard())
-  getAllUser() {
+  @UseGuards(UserGuard)
+  getAllUser(@Req() req) {
+    console.log(req);
     return this.userService.findAll();
   }
   @Get(':id')
-  @UseGuards(new AuthGuard())
+  @UseGuards(UserGuard)
   getSingleUser(@Param('id') UserId: string) {
     return this.userService.findOne(UserId);
   }
   @Delete(':id')
-  @UseGuards(new AuthGuard())
+  @UseGuards(UserGuard)
   deleteUser(@Param('id') USerId: string) {
     return this.userService.remove(USerId);
   }
   @Put(':id')
-  @UseGuards(new AuthGuard())
+  @UseGuards(UserGuard)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
